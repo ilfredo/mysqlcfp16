@@ -1,4 +1,4 @@
-use laboratorio;
+USE laboratorio;
 
 CREATE TABLE FACTURAS (
 letra char NOT NULL,
@@ -30,6 +30,24 @@ CONSTRAINT PK_CLIENTES PRIMARY KEY (id_cliente)
 
 DESCRIBE facturas;
 
+ALTER TABLE FACTURAS 
+	CHANGE id_cliente IDCliente INT, 
+    CHANGE id_articulo IDArticulo INT, 
+    MODIFY Monto DOUBLE UNSIGNED;
+    
+ALTER TABLE ARTICULOS 
+	/*MODIFY IDArticulo INT PRIMARY KEY,*/
+	CHANGE id_articulo IDArticulo INT, 
+    MODIFY Nombre VARCHAR(75),
+    MODIFY Precio DOUBLE UNSIGNED NOT NULL,
+    MODIFY Stock INT UNSIGNED NOT NULL;
+ALTER TABLE ARTICULOS MODIFY IDArticulo INT PRIMARY KEY;    
+
+ALTER TABLE CLIENTES CHANGE id_cliente IDCliente INT;
+ALTER TABLE CLIENTES MODIFY Nombre VARCHAR(30) NOT NULL;
+ALTER TABLE CLIENTES MODIFY Apellido VARCHAR(35) NOT NULL;
+ALTER TABLE CLIENTES CHANGE Comentarios Observaciones VARCHAR(255);
+
 INSERT INTO facturas VALUES
 ("A", 28, 14, 335, "2021-03-18", 1589.50),
 ("A", 39, 26, 157, "2021-04-12", 979.75),
@@ -37,7 +55,7 @@ INSERT INTO facturas VALUES
 ("B", 12, 5, 411, "2021-05-03", 2385.70),
 ("B", 19, 50, 157, "2021-05-26", 979.75);
 
-SELECT * FROM facturas;
+SELECT * FROM clientes;
 
 INSERT INTO articulos VALUES
 (95, "Webcam con Microfono Plug & Play", 513.35, 39),
